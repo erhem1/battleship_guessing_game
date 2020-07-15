@@ -1,4 +1,4 @@
-#include <GlobalVariables.h>
+#include "GlobalVariables.h"
 
 void printBoard()
 {
