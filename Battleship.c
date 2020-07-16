@@ -16,13 +16,9 @@ int board[10][10] = {
 	};
 
 bool friendly_player_choose_coordinates();
-<<<<<<< HEAD
 bool enemyAI_choose_coordinates();
-int main(void)
-=======
 
-int main()
->>>>>>> fdfa43f97227cf87a27831e32df6db9c63da7199
+int main(void)
 {
 	int cycle = 1;	
 	while(1)
@@ -42,12 +38,14 @@ int main()
 	return 0;
 }
 
-bool friendly_player_choose_coordinates()
+bool friendly_player_choose_coordinates(void)
 {
 	int firing_y;
 	int firing_x;
-	scanf("Choose a x:%d", &firing_x);
-	scanf("Choose a y:%d", &firing_y);
+	printf("Choose a x:");
+	scanf("%d", &firing_x);
+	printf("Choose a y:");
+	scanf("%d", &firing_y);
 	switch(board[firing_y][firing_x])
 	{
 		case EMPTY:
@@ -64,7 +62,7 @@ bool friendly_player_choose_coordinates()
 	}
 }
 
-bool enemyAI_choose_coordinates()
+bool enemyAI_choose_coordinates(void)
 {
 	return true;	
 }
