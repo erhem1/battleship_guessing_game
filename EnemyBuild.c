@@ -6,106 +6,95 @@
 
 void buildShips()
 {
+	int xCoordinate = rand() % 10;
+	int yCoordinate = rand() % 10; //chooses a random location on the coordinate plane
+
 	for(int i = 0; i<5;i++)
 	{
-		bool cantBuild=false;
-		int xCoordinate = rand() % 9;
-		int yCoordinate = rand() % 9; //chooses a random location on the coordinate plane
 		bool shipOrientation= rand() %1;
+		int startSize=0;
+		int maxSize=4;
+		int shipBuildCondition = canBuild(xCoordinate,yCoordinate);//checks if the space is 											//empty or not
+		int xCoorPlus=++xCoordinate;
+		int yCoorPlus=++yCoordinate;
+		int xCoorMinus=--xCoordinate;
+		int yCoorMinus=--yCoordinate;
+		printf("\ncoordinates  x%d y%d\n",xCoordinate,yCoordinate);
 
-		if(cantBuild&& i==1)
+		switch(shipBuildCondition)//depending on the condition of the space ship is built
 		{
-			i=0;
-			cantBuild=false;
+			case 1://space is empty and can be built on
+				board[yCoordinate][xCoordinate]=ENEMY;
+				break;
+			case 2: ;//space is already taken by own ship so continue to build onto ship
+				printf("big ship success\n");
+				int direction = rand() %2;
+				if(direction)//checks wether to build left/down or right/up
+				{
+					if(shipOrientation)
+					{
+						if(canBuild(xCoorPlus,yCoordinate)==2)
+						{
+							board[yCoordinate][xCoorPlus]=ENEMY;
+							xCoorPlus++;
+						}	
+					}
+					else
+					{
+					if(canBuild(xCoorMinus,yCoordinate)==2)
+					{
+					board[yCoordinate][xCoorMinus]=ENEMY;
+					xCoorMinus--;
+					}
+					}
+				}
+				else
+				{
+					if(shipOrientation)
+					{
+						if(canBuild(xCoordinate,yCoorPlus)==2)
+						{
+							board[yCoorPlus][xCoordinate]=ENEMY;
+							yCoorPlus++;
+						}
+					}
+					else
+					{
+						if(canBuild(xCoordinate,yCoorMinus)==2)
+						{
+						board[yCoorMinus][xCoordinate]=ENEMY;
+						yCoorMinus--;
+						}
+					}
+				}
+				startSize++;
+				break;
+			case 0:
+			break;
+		}
+		if(startSize==maxSize)
+		{
+			break;
+		}
+		if(rand()%2)
+		{
+			xCoordinate = rand() % 10;
+			yCoordinate = rand() % 10;
+		}
+		else
+		{
+
 		}
 
-		int expand;
-
-			do{
-				int startSize=0;
-				int maxSize=4;
-				int shipBuildCondition = canBuild(xCoordinate,yCoordinate);//checks if the space is 
-												//empty or not
-				
-				switch(shipBuildCondition)//depending on the condition of the space ship is built
-							//on the location
-				{
-					case 1://space is empty and can be built on
-						board[yCoordinate][xCoordinate]=ENEMY;
-						break;
-					case 2: ;//space is already taken by own ship so continue to build onto ship
-						int direction = rand() %1;
-						if(direction)//checks wether to build left/down or right/up
-						{
-							if(shipOrientation)
-							{
-								if(canBuild(xCoordinate+1,yCoordinate)==2)
-								{
-								board[yCoordinate][xCoordinate+1]=ENEMY;
-								}	
-							}
-							else
-							{
-								if(canBuild(xCoordinate,yCoordinate+1)==2)
-								{
-								board[yCoordinate+1][xCoordinate]=ENEMY;
-								}
-							}
-						}
-						else
-						{
-							if(shipOrientation)
-							{
-								if(canBuild(xCoordinate-1,yCoordinate)==2)
-								{
-									board[yCoordinate][xCoordinate-1]=ENEMY;
-								}
-							}
-							else
-							{
-								if(canBuild(xCoordinate,yCoordinate-1)==2)
-								{
-								board[yCoordinate-1][xCoordinate]=ENEMY;
-								}
-							}
-						}
-						break;
-					case 0:
-						if(i==0)
-						{
-							cantBuild=true;
-						}
-						else
-						{
-							--i;
-						}
-						break;
-
-				}
-
-
-				if(startSize==maxSize)
-				{
-					break;
-				}
-				expand = rand() %1;
-				if(expand)
-				{
-					++i;
-				}
-			}while(expand);//chooses wether to continue building or build new ship
-			xCoordinate = rand() %9;
-			yCoordinate = rand() %9;
-		
 	}
 
+
+				
 }
 
 int canBuild(int xCoor,int yCoor)
 {
-	if(!xCoor<0 && !xCoor>10 && !yCoor<0 && !yCoor>10)
-	{
-		if(board[yCoor][xCoor]!=FRIENDLY&& board[yCoor][xCoor]!=ENEMY) //sea is empty
+		if(board[yCoor][xCoor]==EMPTY) //sea is empty
 		{
 			return 1;
 		}
@@ -117,5 +106,4 @@ int canBuild(int xCoor,int yCoor)
 		{
 			return 0;
 		}
-	}
 }

@@ -12,7 +12,7 @@
 void printBoard()
 {
 	printf(" ");
-	for(int a; a<10;a++)
+	for(int a=0; a<10;a++)
 	{
 		printf("%d",a);
 	}
@@ -40,7 +40,9 @@ void printBoard()
 				case ENEMYDESTROYED:
 					printf(RED"%s"COLORRESET,ENEMYSHIP);
 					break;
-
+				case ENEMY:
+					printf(RED"%s"COLORRESET,SHIP);
+					break;
 				default:
 					break;
 					
