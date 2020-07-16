@@ -60,4 +60,20 @@ int ai_y(int middle_position, int difficulty)
 	}
 }
 
+void buildShips()
+{
+	for(int i = 0; i<5;i++)
+	{
+		int xCoordinate = rand() % 9;
+		int yCoordinate = rand() % 9; //chooses a random location on the coordinate plane
+		do
+		{
+			if(rand() % 1)
+			{
+				board
+			}	
+		}
+		while(rand()%1);//chooses wether to continue building or build new ship
+	}
 
+}
