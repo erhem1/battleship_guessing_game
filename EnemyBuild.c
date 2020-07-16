@@ -31,7 +31,7 @@ void buildShips()
 							//on the location
 				{
 					case 1://space is empty and can be built on
-						board[yCoordinate,xCoordinate]=ENEMY;
+						board[yCoordinate][xCoordinate]=ENEMY;
 						break;
 					case 2: ;//space is already taken by own ship so continue to build onto ship
 						int direction = rand() %1;
@@ -41,14 +41,14 @@ void buildShips()
 							{
 								if(canBuild(xCoordinate+1,yCoordinate)==2)
 								{
-								board[yCoordinate,xCoordinate+1]=ENEMY;
+								board[yCoordinate][xCoordinate+1]=ENEMY;
 								}	
 							}
 							else
 							{
 								if(canBuild(xCoordinate,yCoordinate+1)==2)
 								{
-								board[yCoordinate+1,xCoordinate]=ENEMY;
+								board[yCoordinate+1][xCoordinate]=ENEMY;
 								}
 							}
 						}
@@ -58,14 +58,14 @@ void buildShips()
 							{
 								if(canBuild(xCoordinate-1,yCoordinate)==2)
 								{
-									board[yCoordinate,xCoordinate-1]=ENEMY;
+									board[yCoordinate][xCoordinate-1]=ENEMY;
 								}
 							}
 							else
 							{
 								if(canBuild(xCoordinate,yCoordinate-1)==2)
 								{
-								board[yCoordinate-1,xCoordinate]=ENEMY;
+								board[yCoordinate-1][xCoordinate]=ENEMY;
 								}
 							}
 						}
@@ -105,11 +105,11 @@ int canBuild(int xCoor,int yCoor)
 {
 	if(!xCoor<0 && !xCoor>10 && !yCoor<0 && !yCoor>10)
 	{
-		if(board[yCoor,xCoor]!=FRIENDLY&& board[yCoor,xCoor]!=ENEMY) //sea is empty
+		if(board[yCoor][xCoor]!=FRIENDLY&& board[yCoor][xCoor]!=ENEMY) //sea is empty
 		{
 			return 1;
 		}
-		else if(board[yCoor,xCoor]==ENEMY)//ship already built
+		else if(board[yCoor][xCoor]==ENEMY)//ship already built
 		{
 			return 2;
 		}
