@@ -28,6 +28,9 @@ struct twoDArray build_player_ships();
 int main(void)
 {
 	int difficulty;
+	int counter = 0;
+	int* counterptr;
+	counterptr = &counter;
 	while(true)
 	{
 		printf("Choose a difficulty \n1.EASY\n2.MEDIUM\n3.HARD\nDIFFICULTY:");
@@ -39,6 +42,7 @@ int main(void)
 		else break;
 	}
 	buildShips();
+	build_player_ships(counterptr);
 	int cycle = true;	
 	printBoard();
 	while(true)
@@ -55,7 +59,7 @@ int main(void)
 		else
 		{
 			printf("Bot's turn\n");
-			if(enemyAI_choose_coordinates(difficulty))
+			if(enemyAI_choose_coordinates(difficulty, counterptr))
 			{	
 				cycle = true;
 				printBoard();
@@ -95,11 +99,12 @@ bool friendly_player_choose_coordinates(void)
 	return false;
 }
 
-bool enemyAI_choose_coordinates(int difficulty)
+bool enemyAI_choose_coordinates(int difficulty, int* counterptr)
 {
 	struct twoDArray placement; 
-	placement = build_player_ships();
+	placement = build_player_ships(counterptr);
 	int middle_positions[2][5]; 
+	printf("Pizza");
 	for(int i = 0; i<2; i++)
 	{
 		for(int j = 0; j<5 ; i++)
@@ -114,45 +119,41 @@ bool enemyAI_choose_coordinates(int difficulty)
 	int firing_x = ai_x(random_x, difficulty);
 	switch(board[firing_y][firing_x])
 	{
-		case EMPTY: 
-			return true;
-		case DESTROYED:
-			return true;
 		case FRIENDLY:
 			board[firing_y][firing_x] == DESTROYED;
 			return true;
-		case ENEMY:
-			return false;
 		default:
-			return false;	
+			return true;	
 	}		
 	return false;
 }
 
 
-struct twoDArray build_player_ships()  // Intializes player ships when first used. Afterwards is used to return middle_positions. Considers int counter to determine whether to initialize or not.
+struct twoDArray build_player_ships(int* counterptr)  // Intializes player ships when first used. Afterwards is used to return middle_positions. Considers int counter to determine whether to initialize or not.
 {
+	printf("falling apart2\n");
 	int middle_positions[2][5];	
 	static struct twoDArray placement;
 	int x, y;
-	int counter = 0;
-	if(counter ==0)
+	if((*counterptr)==0)
 	{
+		printf("inside\n");
 		for(int i = 0; i<5; i++)
 		{
 			while(true)
 			{
-				int y = (rand() % 40) + 60;
-				int x = rand() % 100;
-				if(y == EMPTY && x == EMPTY) break;
+				y = (rand() % 4) + 6;
+				x = rand() % 10;
+				if(board[y][x]==EMPTY) break;
 			}
 			middle_positions[0][i] = y; //Assign middle_position for later use 0 is y
+			printf("%d,%d,%d\n", middle_positions[0][i], y, x);
 			middle_positions[1][i] = x; //Assign middle_position for later use 1 is x 
-				
-			board[y][x] == FRIENDLY;
-			if(rand()%2 == 1) // Vertical Allignment
+			printf("%d,%d\n", middle_positions[0][i], middle_positions[1][i]);	
+			board[y][x] = FRIENDLY;
+			if((rand()%2) == 1) // Vertical Allignment
 			{
-				if(rand()%2 == 1)  // Up
+				if((rand()%2) == 1)  // Up
 				{
 					for(int j = 1; j<= ((rand()%4)+1) ; j++)
 					{
@@ -171,7 +172,7 @@ struct twoDArray build_player_ships()  // Intializes player ships when first use
 			}
 			else  	   // Horizontal Allignment		
 			{
-				if(rand()%2 == 1) // Left 	
+				if((rand()%2) == 1) // Left 	
 				{
 					for(int j = 1; j<= ((rand()%4)+1) ; j++)
 					{
@@ -193,14 +194,14 @@ struct twoDArray build_player_ships()  // Intializes player ships when first use
 
 		for(int i = 0; i<2; i++)
 		{
-			for(int j = 0; i<5 ; j++)
+			for(int j = 0; j<5 ; j++)
 			{
 				placement.positions[i][j] = middle_positions[i][j];
 			}
 		}
-		counter++;
 	}
-	
+	printf("what");
+	(*counterptr)++;
 	return placement; 
 }
 
