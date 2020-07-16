@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include "Board.h"
+#include <stdlib.h>
 #include <stdbool.h>
+#include "Board.h"
 #include "GlobalVariables.h"
 #include "EnemyAI.h"
 int board[10][10] = {
@@ -18,7 +19,11 @@ int board[10][10] = {
 
 bool friendly_player_choose_coordinates();
 bool enemyAI_choose_coordinates();
-int middle_position[5];  
+struct twoDArray {
+	int positions[2][5];
+};
+struct twoDArray build_player_ships();
+
 int main(void)
 {
 	int difficulty;
@@ -85,12 +90,21 @@ bool friendly_player_choose_coordinates(void)
 		default: 
 			return false;
 	}
-	return false
+	return false;
 }
 
 bool enemyAI_choose_coordinates(int difficulty)
 {
-	int[2][5] middle_positions = build_player_ships();
+	struct twoDArray placement; 
+	placement = build_player_ships();
+	int middle_positions[2][5]; 
+	for(int i = 0; i<2; i++)
+	{
+		for(int j = 0; j<5 ; i++)
+		{
+			middle_positions[i][j] = placement.positions[i][j];
+		}
+	}	
 	int random_y = middle_positions[0][rand() % 5];
 	int random_x = middle_positions[1][rand() % 5];
 
@@ -110,13 +124,14 @@ bool enemyAI_choose_coordinates(int difficulty)
 		default:
 			return false;	
 	}		
-	return false
+	return false;
 }
 
-int[2][5] build_player_ships()
+struct twoDArray build_player_ships()
 {
-	int[2][5] middle_positions;	
+	int middle_positions[2][5];	
 	int x, y;
+
 	for(int i = 0; i<5; i++)
 	{
 		while(true)
@@ -169,6 +184,15 @@ int[2][5] build_player_ships()
 			}
 		}
 	}
-	return middle_positions; 
+	
+	struct twoDArray placement;
+	for(int i = 0; i<2; i++)
+	{
+		for(int j = 0; i<5 ; j++)
+		{
+			placement.positions[i][j] = middle_positions[i][j];
+		}
+	}
+	return placement; 
 }
 
