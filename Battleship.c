@@ -15,10 +15,8 @@ int board[10][10] = {
 	{ EMPTY, EMPTY , EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY , EMPTY, EMPTY}
 	};
 
-bool enemyAI_choose_coordinates();
 bool friendly_player_choose_coordinates();
-enum battleship_coordinates
-
+bool enemyAI_choose_coordinates();
 int main(void)
 {
 	int cycle = 1;	
