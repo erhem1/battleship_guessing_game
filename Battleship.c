@@ -17,9 +17,8 @@ int board[10][10] = {
 
 bool enemyAI_choose_coordinates();
 bool friendly_player_choose_coordinates();
-enum battleship_coordinates
 
-int main(void)
+int main()
 {
 	int cycle = 1;	
 	while(1)

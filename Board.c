@@ -18,7 +18,10 @@ void printBoard()
 			switch(board[i][j])
 			{
 				case EMPTY:
-					printf("%s,%s,%s"BLUE,SEA,COLORRESET);
+					printf(BLUE"%s"COLORRESET,SEA);
+					break;
+				default:
+					break;
 					
 			}
 			if(j==10)
