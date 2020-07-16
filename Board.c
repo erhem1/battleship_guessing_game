@@ -11,13 +11,15 @@
 
 void printBoard()
 {
+	printf(" ");
+	for(int a; a<10;a++)
+	{
+		printf("%d",a);
+	}
+
 	for(int i =0; i<10;i++)
 	{
-		printf(" ");
-		for(int a; a<10;a++)
-		{
-			printf("%d",a);
-		}
+		
 		printf("\n");
 		printf("%d",i);
 
