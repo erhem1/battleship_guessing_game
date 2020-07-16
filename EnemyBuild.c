@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include "EnemyBuild.h"
 #include "GlobalVariables.h"
 
@@ -27,7 +28,7 @@ void buildShips()
 							//on the location
 				{
 					case 1://space is empty and can be built on
-						board[yCoordinate,xCoordinate]=ENEMYSHIP;
+						board[yCoordinate,xCoordinate]=ENEMY;
 						break;
 					case 2://space is already taken by own ship so continue to build onto ship
 						bool direction = rand() %1;
@@ -37,14 +38,14 @@ void buildShips()
 							{
 								if(canBuild(xCoordinate+1,yCooridnate)==2)
 								{
-								board[yCoordinate,xCoordinate+1]=ENEMYSHIP;
+								board[yCoordinate,xCoordinate+1]=ENEMY;
 								}	
 							}
 							else
 							{
 								if(canBuild(xCoordinate,yCooridnate+1)==2)
 								{
-								board[yCoordinate+1,xCoordinate]=ENEMYSHIP;
+								board[yCoordinate+1,xCoordinate]=ENEMY;
 								}
 							}
 						}
@@ -54,14 +55,14 @@ void buildShips()
 							{
 								if(canBuild(xCoordinate-1,yCooridnate)==2)
 								{
-									board[yCoordinate,xCoordinate-1]=ENEMYSHIP;
+									board[yCoordinate,xCoordinate-1]=ENEMY;
 								}
 							}
 							else
 							{
 								if(canBuild(xCoordinate,yCooridnate-1)==2)
 								{
-								board[yCoordinate-1,xCoordinate]=ENEMYSHIP;
+								board[yCoordinate-1,xCoordinate]=ENEMY;
 								}
 							}
 						}

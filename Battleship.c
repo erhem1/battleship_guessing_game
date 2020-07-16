@@ -38,6 +38,7 @@ int main(void)
 		}
 		else break;
 	}
+	buildShips();
 	int cycle = true;	
 	printBoard();
 	while(true)
@@ -132,7 +133,7 @@ bool enemyAI_choose_coordinates(int difficulty)
 struct twoDArray store_player_middle_positions()
 {
 	struct twoDArray placement;	
-	placement 
+	//placement 
 }
 
 struct twoDArray build_player_ships()
