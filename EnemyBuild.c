@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include "EnemyBuild.h"
+#include "GlobalVariables.h"
+
 void buildShips()
 {
 	for(int i = 0; i<5;i++)
