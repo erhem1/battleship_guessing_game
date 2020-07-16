@@ -49,6 +49,8 @@ bool friendly_player_choose_coordinates(void)
 	switch(board[firing_y][firing_x])
 	{
 		case EMPTY:
+			printf("fired at empty land\n");
+			return false;
 		case DESTROYED:
 			return true;
 		case FRIENDLY:
