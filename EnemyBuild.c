@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include "EnemyBuild.h"
 #include "GlobalVariables.h"
 
@@ -18,6 +19,8 @@ void buildShips()
 			cantBuild=false;
 		}
 
+		int expand;
+
 			do{
 				int startSize=0;
 				int maxSize=4;
@@ -30,20 +33,20 @@ void buildShips()
 					case 1://space is empty and can be built on
 						board[yCoordinate,xCoordinate]=ENEMY;
 						break;
-					case 2://space is already taken by own ship so continue to build onto ship
-						bool direction = rand() %1;
+					case 2: ;//space is already taken by own ship so continue to build onto ship
+						int direction = rand() %1;
 						if(direction)//checks wether to build left/down or right/up
 						{
 							if(shipOrientation)
 							{
-								if(canBuild(xCoordinate+1,yCooridnate)==2)
+								if(canBuild(xCoordinate+1,yCoordinate)==2)
 								{
 								board[yCoordinate,xCoordinate+1]=ENEMY;
 								}	
 							}
 							else
 							{
-								if(canBuild(xCoordinate,yCooridnate+1)==2)
+								if(canBuild(xCoordinate,yCoordinate+1)==2)
 								{
 								board[yCoordinate+1,xCoordinate]=ENEMY;
 								}
@@ -53,14 +56,14 @@ void buildShips()
 						{
 							if(shipOrientation)
 							{
-								if(canBuild(xCoordinate-1,yCooridnate)==2)
+								if(canBuild(xCoordinate-1,yCoordinate)==2)
 								{
 									board[yCoordinate,xCoordinate-1]=ENEMY;
 								}
 							}
 							else
 							{
-								if(canBuild(xCoordinate,yCooridnate-1)==2)
+								if(canBuild(xCoordinate,yCoordinate-1)==2)
 								{
 								board[yCoordinate-1,xCoordinate]=ENEMY;
 								}
@@ -85,7 +88,7 @@ void buildShips()
 				{
 					break;
 				}
-				int expand = rand() %1;
+				expand = rand() %1;
 				if(expand)
 				{
 					++i;
@@ -106,7 +109,7 @@ int canBuild(int xCoor,int yCoor)
 		{
 			return 1;
 		}
-		else if(board[yCoord,xCoor]==ENEMY)//ship already built
+		else if(board[yCoor,xCoor]==ENEMY)//ship already built
 		{
 			return 2;
 		}
