@@ -4,6 +4,7 @@
 #include "Board.h"
 #include "GlobalVariables.h"
 #include "EnemyAI.h"
+#include "EnemyBuild.h"
 int board[10][10] = {
 	{ EMPTY, EMPTY , EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY , EMPTY, EMPTY},
 	{ EMPTY, EMPTY , EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY , EMPTY, EMPTY},
@@ -125,6 +126,13 @@ bool enemyAI_choose_coordinates(int difficulty)
 			return false;	
 	}		
 	return false;
+}
+
+
+struct twoDArray store_player_middle_positions()
+{
+	struct twoDArray placement;	
+	placement 
 }
 
 struct twoDArray build_player_ships()
