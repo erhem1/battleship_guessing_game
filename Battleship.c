@@ -2,6 +2,7 @@
 #include "Board.h"
 #include <stdbool.h>
 #include "GlobalVariables.h"
+#include "EnemyAI.h"
 int board[10][10] = {
 	{ EMPTY, EMPTY , EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY , EMPTY, EMPTY},
 	{ EMPTY, EMPTY , EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY , EMPTY, EMPTY},
