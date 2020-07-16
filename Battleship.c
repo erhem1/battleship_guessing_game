@@ -18,7 +18,7 @@ int board[10][10] = {
 
 bool friendly_player_choose_coordinates();
 bool enemyAI_choose_coordinates();
-
+int middle_position[5];  
 int main(void)
 {
 	int cycle = true;	
