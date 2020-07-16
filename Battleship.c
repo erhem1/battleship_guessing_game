@@ -20,18 +20,28 @@ bool enemyAI_choose_coordinates();
 
 int main(void)
 {
-	int cycle = 1;	
-	while(1)
+	int cycle = true;	
+	printBoard();
+	while(true)
 	{
 		if(cycle)
 		{
-		 	printBoard();
-			if(friendly_player_choose_coordinates()) cycle = 0;	
+			if(friendly_player_choose_coordinates()) 
+			{
+				
+				cycle = false;	
+				printBoard();
+			}
 		}		
 		else
 		{
-			printBoard();
-			if(enemyAI_choose_coordinates()) cycle = 1;
+			printf("Bot's turn\n");
+			if(enemyAI_choose_coordinates())
+			{	
+				cycle = true;
+				printBoard();
+			}
+
 		}
 		
 	}
@@ -50,8 +60,9 @@ bool friendly_player_choose_coordinates(void)
 	{
 		case EMPTY:
 			printf("fired at empty land\n");
-			return false;
+			return true;
 		case DESTROYED:
+			printf("fired at already destroyed ship\n");
 			return true;
 		case FRIENDLY:
 			printf("Can't fire at friendly unit \n");
@@ -62,11 +73,29 @@ bool friendly_player_choose_coordinates(void)
 		default: 
 			return false;
 	}
+	return false
 }
 
 bool enemyAI_choose_coordinates(void)
 {
-	return true;	
+	int firing_y = ai_y();
+	int firing_x = ai_x();
+	switch(board[firing_y][firing_x])
+	{
+		case EMPTY: 
+			return true;
+		case DESTROYED:
+			return true;
+		case FRIENDLY:
+			board[firing_y][firing_x] == DESTROYED;
+			return true;
+		case ENEMY:
+			return false;
+		default:
+			return false;	
+	}		
+	return false
 }
+
 
 
