@@ -11,9 +11,9 @@
 
 void printBoard()
 {
-	for(int i =0; i<=11;i++)
+	for(int i =0; i<10;i++)
 	{
-		for(int j=0; j<11;j++)
+		for(int j=0; j<10;j++)
 		{
 			switch(board[i][j])
 			{
@@ -24,10 +24,7 @@ void printBoard()
 					break;
 					
 			}
-			if(j==10)
-			{
-				printf("\n");
-			}
 		}
+		printf("\n");
 	}
 }
