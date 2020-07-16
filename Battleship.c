@@ -2,7 +2,6 @@
 #include "Board.h"
 #include <stdbool.h>
 #include "GlobalVariables.h"
-
 int board[10][10] = {
 	{ EMPTY, EMPTY , EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY , EMPTY, EMPTY},
 	{ EMPTY, EMPTY , EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY , EMPTY, EMPTY},
@@ -16,6 +15,9 @@ int board[10][10] = {
 	{ EMPTY, EMPTY , EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY , EMPTY, EMPTY}
 	};
 
+bool enemyAI_choose_coordinates();
+bool friendly_player_choose_coordinates();
+
 int main(void)
 {
 	int cycle = 1;	
@@ -23,8 +25,14 @@ int main(void)
 	{
 		if(cycle)
 		{
-			printBoard();
+		 	printBoard();
+			if(friendly_player_choose_coordinates()) cycle = 0;	
 		}		
+		else
+		{
+			printBoard();
+			if(enemyAI_choose_coordinates()) cycle = 1;
+		}
 		
 	}
 	return 0;
@@ -52,9 +60,9 @@ bool friendly_player_choose_coordinates()
 	}
 }
 
-void enemyAI_choose_coordinates()
+bool enemyAI_choose_coordinates()
 {
-	
+	return true;	
 }
 
 
