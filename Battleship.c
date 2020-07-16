@@ -21,6 +21,17 @@ bool enemyAI_choose_coordinates();
 int middle_position[5];  
 int main(void)
 {
+	int difficulty;
+	while(true)
+	{
+		printf("Choose a difficulty \n1.EASY\n2.MEDIUM\n3.HARD\nDIFFICULTY:");
+		scanf("%d",&difficulty);
+		if(difficulty!=1 || difficulty!=2 || difficulty!=3)
+		{
+			printf("Choose a valid difficulty\n");
+		}
+		else break;
+	}
 	int cycle = true;	
 	printBoard();
 	while(true)
@@ -37,7 +48,7 @@ int main(void)
 		else
 		{
 			printf("Bot's turn\n");
-			if(enemyAI_choose_coordinates())
+			if(enemyAI_choose_coordinates(difficulty))
 			{	
 				cycle = true;
 				printBoard();
@@ -77,10 +88,14 @@ bool friendly_player_choose_coordinates(void)
 	return false
 }
 
-bool enemyAI_choose_coordinates(void)
+bool enemyAI_choose_coordinates(int difficulty)
 {
-	int firing_y = ai_y();
-	int firing_x = ai_x();
+	int[2][5] middle_positions = build_player_ships();
+	int random_y = middle_positions[0][rand() % 5];
+	int random_x = middle_positions[1][rand() % 5];
+
+	int firing_y = ai_y(random_y, difficulty);
+	int firing_x = ai_x(random_x, difficulty);
 	switch(board[firing_y][firing_x])
 	{
 		case EMPTY: 
@@ -98,5 +113,62 @@ bool enemyAI_choose_coordinates(void)
 	return false
 }
 
+int[2][5] build_player_ships()
+{
+	int[2][5] middle_positions;	
+	int x, y;
+	for(int i = 0; i<5; i++)
+	{
+		while(true)
+		{
+			int y = (rand() % 40) + 60;
+			int x = rand() % 100;
+			if(y == EMPTY && x == EMPTY) break;
+		}
+		middle_positions[0][i] = y; //Assign middle_position for later use 0 is y
+		middle_positions[1][i] = x; //Assign middle_position for later use 1 is x 
+			
+		board[y][x] == FRIENDLY;
+		if(rand()%2 == 1) // Vertical Allignment
+		{
+			if(rand()%2 == 1)  // Up
+			{
+				for(int j = 1; j<= ((rand()%4)+1) ; j++)
+				{
+					if(board[y-j][x] == EMPTY) board[y-j][x] = FRIENDLY;
+					else break;
+				}
+			}
+			else   		   // Down
+			{
+				for(int j = 1; j<= ((rand()%4)+1) ; j++)
+				{
+					if(board[y+j][x] == EMPTY) board[y+j][x] = FRIENDLY;
+					else break;
+				}
+			}
+		}
+		else  	   // Horizontal Allignment		
+		{
+			if(rand()%2 == 1) // Left 	
+			{
+				for(int j = 1; j<= ((rand()%4)+1) ; j++)
+				{
+					if(board[y][x-j] == EMPTY) board[y][x-j] = FRIENDLY;
+					else break;
+				}	
+			}
+			else		  // Right 
+			{
+				for(int j = 1; j<= ((rand()%4)+1) ; j++)
+				{
+					if(board[y][x+j] == EMPTY) board[y][x+j] = FRIENDLY;
+					else break;
+				}
 
+			}
+		}
+	}
+	return middle_positions; 
+}
 
