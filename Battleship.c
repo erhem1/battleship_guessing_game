@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "Board.h"
 #include <stdbool.h>
+#include "GlobalVariables.h"
 
 int board[10][10] = {
 	{ EMPTY, EMPTY , EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY , EMPTY, EMPTY},
@@ -22,11 +23,10 @@ int main(void)
 	{
 		if(cycle)
 		{
-			
+			printBoard();
 		}		
 		
 	}
-	printBoard();
 	return 0;
 }
 
@@ -47,7 +47,7 @@ bool friendly_player_choose_coordinates()
 		case ENEMY: 
 			board[firing_y][firing_x] == DESTROYED;
 			return true;
-		case default: 
+		default: 
 			return false;
 	}
 }
