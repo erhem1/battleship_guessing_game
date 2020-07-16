@@ -32,7 +32,7 @@ int main(void)
 	{
 		printf("Choose a difficulty \n1.EASY\n2.MEDIUM\n3.HARD\nDIFFICULTY:");
 		scanf("%d",&difficulty);
-		if(difficulty!=1 || difficulty!=2 || difficulty!=3)
+		if(difficulty!=1 && difficulty!=2 && difficulty!=3)
 		{
 			printf("Choose a valid difficulty\n");
 		}
@@ -130,78 +130,77 @@ bool enemyAI_choose_coordinates(int difficulty)
 }
 
 
-struct twoDArray store_player_middle_positions()
-{
-	struct twoDArray placement;	
-	//placement 
-}
-
-struct twoDArray build_player_ships()
+struct twoDArray build_player_ships()  // Intializes player ships when first used. Afterwards is used to return middle_positions. Considers int counter to determine whether to initialize or not.
 {
 	int middle_positions[2][5];	
+	static struct twoDArray placement;
 	int x, y;
-
-	for(int i = 0; i<5; i++)
+	int counter = 0;
+	if(counter ==0)
 	{
-		while(true)
+		for(int i = 0; i<5; i++)
 		{
-			int y = (rand() % 40) + 60;
-			int x = rand() % 100;
-			if(y == EMPTY && x == EMPTY) break;
-		}
-		middle_positions[0][i] = y; //Assign middle_position for later use 0 is y
-		middle_positions[1][i] = x; //Assign middle_position for later use 1 is x 
-			
-		board[y][x] == FRIENDLY;
-		if(rand()%2 == 1) // Vertical Allignment
-		{
-			if(rand()%2 == 1)  // Up
+			while(true)
 			{
-				for(int j = 1; j<= ((rand()%4)+1) ; j++)
+				int y = (rand() % 40) + 60;
+				int x = rand() % 100;
+				if(y == EMPTY && x == EMPTY) break;
+			}
+			middle_positions[0][i] = y; //Assign middle_position for later use 0 is y
+			middle_positions[1][i] = x; //Assign middle_position for later use 1 is x 
+				
+			board[y][x] == FRIENDLY;
+			if(rand()%2 == 1) // Vertical Allignment
+			{
+				if(rand()%2 == 1)  // Up
 				{
-					if(board[y-j][x] == EMPTY) board[y-j][x] = FRIENDLY;
-					else break;
+					for(int j = 1; j<= ((rand()%4)+1) ; j++)
+					{
+						if(board[y-j][x] == EMPTY) board[y-j][x] = FRIENDLY;
+						else break;
+					}
+				}
+				else   		   // Down
+				{
+					for(int j = 1; j<= ((rand()%4)+1) ; j++)
+					{
+						if(board[y+j][x] == EMPTY) board[y+j][x] = FRIENDLY;
+						else break;
+					}
 				}
 			}
-			else   		   // Down
+			else  	   // Horizontal Allignment		
 			{
-				for(int j = 1; j<= ((rand()%4)+1) ; j++)
+				if(rand()%2 == 1) // Left 	
 				{
-					if(board[y+j][x] == EMPTY) board[y+j][x] = FRIENDLY;
-					else break;
+					for(int j = 1; j<= ((rand()%4)+1) ; j++)
+					{
+						if(board[y][x-j] == EMPTY) board[y][x-j] = FRIENDLY;
+						else break;
+					}	
 				}
-			}
-		}
-		else  	   // Horizontal Allignment		
-		{
-			if(rand()%2 == 1) // Left 	
-			{
-				for(int j = 1; j<= ((rand()%4)+1) ; j++)
+				else		  // Right 
 				{
-					if(board[y][x-j] == EMPTY) board[y][x-j] = FRIENDLY;
-					else break;
-				}	
-			}
-			else		  // Right 
-			{
-				for(int j = 1; j<= ((rand()%4)+1) ; j++)
-				{
-					if(board[y][x+j] == EMPTY) board[y][x+j] = FRIENDLY;
-					else break;
-				}
+					for(int j = 1; j<= ((rand()%4)+1) ; j++)
+					{
+						if(board[y][x+j] == EMPTY) board[y][x+j] = FRIENDLY;
+						else break;
+					}
 
+				}
 			}
 		}
+
+		for(int i = 0; i<2; i++)
+		{
+			for(int j = 0; i<5 ; j++)
+			{
+				placement.positions[i][j] = middle_positions[i][j];
+			}
+		}
+		counter++;
 	}
 	
-	struct twoDArray placement;
-	for(int i = 0; i<2; i++)
-	{
-		for(int j = 0; i<5 ; j++)
-		{
-			placement.positions[i][j] = middle_positions[i][j];
-		}
-	}
 	return placement; 
 }
 
