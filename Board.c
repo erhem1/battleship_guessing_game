@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "GlobalVariables.h"
 
 void printBoard()
@@ -6,7 +7,11 @@ void printBoard()
 	{
 		for(int j=0; j<10;j++)
 		{
-			printf(board[i][j]);
+			printf("%d ",board[i][j]);
+			if(i==10)
+			{
+				printf("\n");
+			}
 		}
 	}
 }

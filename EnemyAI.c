@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "GlobalVariables.h"
 
 int ai_x(int middle_position, int difficulty)
 {
