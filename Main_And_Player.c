@@ -120,7 +120,8 @@ struct twoDArray build_player_ships()  // Intializes player ships when first use
 			{
 				for(int j = 1; j<= ((rand()%4)+1) ; j++)
 				{
-					if(board[y-j][x] == EMPTY) board[y-j][x] = FRIENDLY;
+					if(board[y-j][x] == EMPTY || board[y-j][x] == FRIENDLY) 
+						board[y-j][x] = FRIENDLY;
 					else break;
 				}
 			}
@@ -128,7 +129,8 @@ struct twoDArray build_player_ships()  // Intializes player ships when first use
 			{
 				for(int j = 1; j<= ((rand()%4)+1) ; j++)
 				{
-					if(board[y+j][x] == EMPTY) board[y+j][x] = FRIENDLY;
+					if(board[y+j][x] == EMPTY || board[y+j][x] == FRIENDLY) 
+						board[y+j][x] = FRIENDLY;
 					else break;
 				}
 			}
@@ -139,7 +141,8 @@ struct twoDArray build_player_ships()  // Intializes player ships when first use
 			{
 				for(int j = 1; j<= ((rand()%4)+1) ; j++)
 				{
-					if(board[y][x-j] == EMPTY) board[y][x-j] = FRIENDLY;
+					if(board[y][x-j] == EMPTY || board[y][x-j] == FRIENDLY) 
+						board[y][x-j] = FRIENDLY;
 					else break;
 				}	
 			}
@@ -147,7 +150,8 @@ struct twoDArray build_player_ships()  // Intializes player ships when first use
 			{
 				for(int j = 1; j<= ((rand()%4)+1) ; j++)
 				{
-					if(board[y][x+j] == EMPTY) board[y][x+j] = FRIENDLY;
+					if(board[y][x+j] == EMPTY || board[y][x+j] == FRIENDLY) 
+						board[y][x+j] = FRIENDLY;
 					else break;
 				}
 
