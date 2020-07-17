@@ -24,7 +24,7 @@ void buildShips()
 	int buildDirection=0;
 	for(int i = 0; i<5;i++)
 	{
-		printf("\n cycles:%d\n",i);
+		
 		if(!shipRotationChosen)
 		{
 			shipOrientation= rand() %1;
@@ -32,33 +32,32 @@ void buildShips()
 		shipRotationChosen=true;
 		int shipBuildCondition = canBuild(xCoordinate,yCoordinate);//checks if the space is 
 										//empty or not
-		printf("\noutside switch\n");
+	
 		switch(shipBuildCondition)//depending on the condition of the space ship is built
 		{
 			case BUILD://space is empty and can be built on	
 				board[yCoordinate][xCoordinate]=ENEMY;
 				shipBuilt=true;
-				printf("\nship building\n");
+			
 				break;
 			case EXPAND: ; //space is already taken by own ship so continue to build onto ship
 				if(shipBuilt)
 				{
-			
 				int expansionSize=(rand() % 3)+1;
 				for(int j=0;j<expansionSize;j++)
 				{
 					int direction = rand() %2;
 					if(shipOrientation)//checks wether to build left/down or right/up
 					{
-						printf("1");
+					
 						if(direction||buildDirection<0)
 						{
-							printf("2");
+			
 							if(canBuild(xCoorPlus,yCoordinate)==EMPTY&&
 									canBuild(xCoordinate,yCoordinate)==EXPAND)
 							{
-								printf("3");
-								board[yCoordinate][xCoorPlus]=FRIENDLY;
+				
+								board[yCoordinate][xCoorPlus]=ENEMY;
 								++buildDirection;
 								expandFailed=false;
 								break;
@@ -72,12 +71,12 @@ void buildShips()
 						}
 						else
 						{
-							printf("2");
+				
 							if(canBuild(xCoorMinus,yCoordinate)==EMPTY&&
 									canBuild(xCoordinate,yCoordinate)==EXPAND)
 							{
-								printf("3");
-								board[yCoordinate][xCoorMinus]=FRIENDLY;
+	
+								board[yCoordinate][xCoorMinus]=ENEMY;
 								--buildDirection;
 								expandFailed=false;
 								break;
@@ -93,14 +92,14 @@ void buildShips()
 					}
 					else
 					{
-						printf("1");
+		
 						if(direction||buildDirection<0)
-						{	printf("2");
+						{
 							if(canBuild(xCoordinate,yCoorPlus)==EMPTY &&
 									canBuild(xCoordinate,yCoordinate)==EXPAND)
 							{
-								printf("3");
-								board[yCoorPlus][xCoordinate]=FRIENDLY;
+					
+								board[yCoorPlus][xCoordinate]=ENEMY;
 								++buildDirection;
 								expandFailed=false;
 								break;
@@ -115,12 +114,12 @@ void buildShips()
 						}
 						else
 						{
-							printf("2");
+							
 							if(canBuild(xCoordinate,yCoorMinus)==EMPTY &&
 									canBuild(xCoordinate,yCoordinate)==EXPAND)
 						       	{
-								printf("3");
-								board[yCoorMinus][xCoordinate]=FRIENDLY;
+		
+								board[yCoorMinus][xCoordinate]=ENEMY;
 								--buildDirection;
 								expandFailed=false;
 								break;
@@ -148,18 +147,13 @@ void buildShips()
 				
 				}
 			
-				--i;
 				}
-				break;
-			case ERROR:
 				--i;
 				break;
 			default:
-				printf("\nerror case\n");
-				--i;	
+				--i;
 				break;
 		}
-		printf("\nthis is unexpected\n");
 	}
 }
 
