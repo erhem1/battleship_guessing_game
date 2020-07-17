@@ -63,7 +63,7 @@ void buildShips()
 							else
 							{
 								expandFailed=true;
-							
+						
 							}
 						}
 						else
@@ -80,7 +80,7 @@ void buildShips()
 							else
 							{
 								expandFailed=true;
-															break;
+															
 
 							}
 						}
@@ -101,7 +101,7 @@ void buildShips()
 							else
 							{
 								expandFailed=true;
-															break;
+														
 							
 							}	
 						}
@@ -119,7 +119,7 @@ void buildShips()
 							else
 							{
 								expandFailed=true;
-															break;
+													
 							}
 						}
 					}
@@ -138,7 +138,7 @@ void buildShips()
 				
 				}
 			
-				--i;
+				i-=1;
 				}
 				break;
 			case ERROR:	
