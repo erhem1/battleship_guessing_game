@@ -32,11 +32,13 @@ void buildShips()
 		shipRotationChosen=true;
 		int shipBuildCondition = canBuild(xCoordinate,yCoordinate);//checks if the space is 
 										//empty or not
+		printf("\noutside switch\n");
 		switch(shipBuildCondition)//depending on the condition of the space ship is built
 		{
 			case BUILD://space is empty and can be built on	
 				board[yCoordinate][xCoordinate]=ENEMY;
 				shipBuilt=true;
+				printf("\nship building\n");
 				break;
 			case EXPAND: ; //space is already taken by own ship so continue to build onto ship
 				if(shipBuilt)
@@ -59,10 +61,12 @@ void buildShips()
 								board[yCoordinate][xCoorPlus]=FRIENDLY;
 								++buildDirection;
 								expandFailed=false;
+								break;
 							}
 							else
 							{
 								expandFailed=true;
+								break;
 						
 							}
 						}
@@ -76,10 +80,12 @@ void buildShips()
 								board[yCoordinate][xCoorMinus]=FRIENDLY;
 								--buildDirection;
 								expandFailed=false;
+								break;
 							}
 							else
 							{
 								expandFailed=true;
+								break;
 															
 
 							}
@@ -97,10 +103,12 @@ void buildShips()
 								board[yCoorPlus][xCoordinate]=FRIENDLY;
 								++buildDirection;
 								expandFailed=false;
+								break;
 							}
 							else
 							{
 								expandFailed=true;
+								break;
 														
 							
 							}	
@@ -115,10 +123,12 @@ void buildShips()
 								board[yCoorMinus][xCoordinate]=FRIENDLY;
 								--buildDirection;
 								expandFailed=false;
+								break;
 							}
 							else
 							{
 								expandFailed=true;
+								break;
 													
 							}
 						}
@@ -138,19 +148,25 @@ void buildShips()
 				
 				}
 			
-				i-=1;
+				--i;
 				}
 				break;
-			case ERROR:	
+			case ERROR:
+				--i;
+				break;
+			default:
+				printf("\nerror case\n");
+				--i;	
 				break;
 		}
+		printf("\nthis is unexpected\n");
 	}
 }
 
 
 int canBuild(int xCoor,int yCoor)
 {
-		if(board[yCoor][xCoor]==EMPTY&&board[yCoor][xCoor]!=ENEMY) //sea is empty
+	if(board[yCoor][xCoor]==EMPTY&&board[yCoor][xCoor]!=ENEMY) //sea is empty
 		{
 			return BUILD;
 		}
@@ -158,7 +174,7 @@ int canBuild(int xCoor,int yCoor)
 		{
 			return EXPAND;
 		}
-		else//can't build
+		else
 		{
 			return ERROR;
 		}
