@@ -28,9 +28,6 @@ struct twoDArray build_player_ships();
 int main(void)
 {
 	int difficulty;
-	int counter = 0;
-	int* counterptr;
-	counterptr = &counter;
 	while(true)
 	{
 		printf("Choose a difficulty \n1.EASY\n2.MEDIUM\n3.HARD\nDIFFICULTY:");
@@ -42,7 +39,7 @@ int main(void)
 		else break;
 	}
 	buildShips();
-	build_player_ships(counterptr);
+	struct twoDArray middle_positions = build_player_ships();
 	int cycle = true;	
 	printBoard();
 	while(true)
@@ -59,7 +56,7 @@ int main(void)
 		else
 		{
 			printf("Bot's turn\n");
-			if(enemyAI_choose_coordinates(difficulty, counterptr))
+			if(enemyAI_choose_coordinates(difficulty, middle_positions))
 			{	
 				cycle = true;
 				printBoard();
@@ -99,21 +96,21 @@ bool friendly_player_choose_coordinates(void)
 	return false;
 }
 
-bool enemyAI_choose_coordinates(int difficulty, int* counterptr)
+bool enemyAI_choose_coordinates(int difficulty, struct twoDArray middle_position)
 {
-	struct twoDArray placement; 
-	placement = build_player_ships(counterptr);
-	int middle_positions[2][5]; 
-	printf("Pizza");
-	for(int i = 0; i<2; i++)
+	printf("test\n");
+	int middle_pos[2][5];
+	int random_number = rand()%5;
+	/*for(int i = 0; i<2; i++)
 	{
+		printf("Pizza");
 		for(int j = 0; j<5 ; i++)
 		{
-			middle_positions[i][j] = placement.positions[i][j];
+			middle_pos[i][j] = final_placement.positions[i][j];
 		}
-	}	
-	int random_y = middle_positions[0][rand() % 5];
-	int random_x = middle_positions[1][rand() % 5];
+	}*/	
+	int random_y = middle_pos[0][random_number];
+	int random_x = middle_pos[1][random_number];
 
 	int firing_y = ai_y(random_y, difficulty);
 	int firing_x = ai_x(random_x, difficulty);
@@ -129,79 +126,75 @@ bool enemyAI_choose_coordinates(int difficulty, int* counterptr)
 }
 
 
-struct twoDArray build_player_ships(int* counterptr)  // Intializes player ships when first used. Afterwards is used to return middle_positions. Considers int counter to determine whether to initialize or not.
+struct twoDArray build_player_ships()  // Intializes player ships when first used. Afterwards is used to return middle_positions. Considers int counter to determine whether to initialize or not.
 {
 	printf("falling apart2\n");
 	int middle_positions[2][5];	
 	static struct twoDArray placement;
 	int x, y;
-	if((*counterptr)==0)
+	printf("inside\n");
+	for(int i = 0; i<5; i++)
 	{
-		printf("inside\n");
-		for(int i = 0; i<5; i++)
+		while(true)
 		{
-			while(true)
+			y = (rand() % 4) + 6;
+			x = rand() % 10;
+			if(board[y][x]==EMPTY) break;
+		}
+		middle_positions[0][i] = y; //Assign middle_position for later use 0 is y
+		printf("%d,%d,%d\n", middle_positions[0][i], y, x);
+		middle_positions[1][i] = x; //Assign middle_position for later use 1 is x 
+		printf("%d,%d\n", middle_positions[0][i], middle_positions[1][i]);	
+		board[y][x] = FRIENDLY;
+		if((rand()%2) == 1) // Vertical Allignment
+		{
+			if((rand()%2) == 1)  // Up
 			{
-				y = (rand() % 4) + 6;
-				x = rand() % 10;
-				if(board[y][x]==EMPTY) break;
-			}
-			middle_positions[0][i] = y; //Assign middle_position for later use 0 is y
-			printf("%d,%d,%d\n", middle_positions[0][i], y, x);
-			middle_positions[1][i] = x; //Assign middle_position for later use 1 is x 
-			printf("%d,%d\n", middle_positions[0][i], middle_positions[1][i]);	
-			board[y][x] = FRIENDLY;
-			if((rand()%2) == 1) // Vertical Allignment
-			{
-				if((rand()%2) == 1)  // Up
+				for(int j = 1; j<= ((rand()%4)+1) ; j++)
 				{
-					for(int j = 1; j<= ((rand()%4)+1) ; j++)
-					{
-						if(board[y-j][x] == EMPTY) board[y-j][x] = FRIENDLY;
-						else break;
-					}
-				}
-				else   		   // Down
-				{
-					for(int j = 1; j<= ((rand()%4)+1) ; j++)
-					{
-						if(board[y+j][x] == EMPTY) board[y+j][x] = FRIENDLY;
-						else break;
-					}
+					if(board[y-j][x] == EMPTY) board[y-j][x] = FRIENDLY;
+					else break;
 				}
 			}
-			else  	   // Horizontal Allignment		
+			else   		   // Down
 			{
-				if((rand()%2) == 1) // Left 	
+				for(int j = 1; j<= ((rand()%4)+1) ; j++)
 				{
-					for(int j = 1; j<= ((rand()%4)+1) ; j++)
-					{
-						if(board[y][x-j] == EMPTY) board[y][x-j] = FRIENDLY;
-						else break;
-					}	
-				}
-				else		  // Right 
-				{
-					for(int j = 1; j<= ((rand()%4)+1) ; j++)
-					{
-						if(board[y][x+j] == EMPTY) board[y][x+j] = FRIENDLY;
-						else break;
-					}
-
+					if(board[y+j][x] == EMPTY) board[y+j][x] = FRIENDLY;
+					else break;
 				}
 			}
 		}
-
-		for(int i = 0; i<2; i++)
+		else  	   // Horizontal Allignment		
 		{
-			for(int j = 0; j<5 ; j++)
+			if((rand()%2) == 1) // Left 	
 			{
-				placement.positions[i][j] = middle_positions[i][j];
+				for(int j = 1; j<= ((rand()%4)+1) ; j++)
+				{
+					if(board[y][x-j] == EMPTY) board[y][x-j] = FRIENDLY;
+					else break;
+				}	
+			}
+			else		  // Right 
+			{
+				for(int j = 1; j<= ((rand()%4)+1) ; j++)
+				{
+					if(board[y][x+j] == EMPTY) board[y][x+j] = FRIENDLY;
+					else break;
+				}
+
 			}
 		}
 	}
+
+	for(int i = 0; i<2; i++)
+	{
+		for(int j = 0; j<5 ; j++)
+		{
+			placement.positions[i][j] = middle_positions[i][j];
+		}
+	}
 	printf("what");
-	(*counterptr)++;
 	return placement; 
 }
 
