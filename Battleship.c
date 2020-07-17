@@ -18,12 +18,13 @@ int board[10][10] = {
 	{ EMPTY, EMPTY , EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY , EMPTY, EMPTY}
 	};
 
-bool friendly_player_choose_coordinates();
-bool enemyAI_choose_coordinates();
 struct twoDArray {
 	int positions[2][5];
 };
+bool friendly_player_choose_coordinates();
+bool enemyAI_choose_coordinates();
 struct twoDArray build_player_ships();
+
 
 int main(void)
 {
@@ -39,7 +40,7 @@ int main(void)
 		else break;
 	}
 	buildShips();
-	struct twoDArray middle_positions = build_player_ships();
+	struct twoDArray structure_main = build_player_ships();
 	int cycle = true;	
 	printBoard();
 	while(true)
@@ -56,7 +57,7 @@ int main(void)
 		else
 		{
 			printf("Bot's turn\n");
-			if(enemyAI_choose_coordinates(difficulty, middle_positions))
+			if(enemyAI_choose_coordinates(difficulty, structure_main))
 			{	
 				cycle = true;
 				printBoard();
@@ -96,10 +97,9 @@ bool friendly_player_choose_coordinates(void)
 	return false;
 }
 
-bool enemyAI_choose_coordinates(int difficulty, struct twoDArray middle_position)
+bool enemyAI_choose_coordinates(int difficulty, struct twoDArray structure_main)
 {
 	printf("test\n");
-	int middle_pos[2][5];
 	int random_number = rand()%5;
 	/*for(int i = 0; i<2; i++)
 	{
@@ -109,8 +109,8 @@ bool enemyAI_choose_coordinates(int difficulty, struct twoDArray middle_position
 			middle_pos[i][j] = final_placement.positions[i][j];
 		}
 	}*/	
-	int random_y = middle_pos[0][random_number];
-	int random_x = middle_pos[1][random_number];
+	int random_y = structure_main.positions[0][random_number];
+	int random_x = structure_main.positions[1][random_number];
 
 	int firing_y = ai_y(random_y, difficulty);
 	int firing_x = ai_x(random_x, difficulty);
