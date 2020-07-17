@@ -43,7 +43,6 @@ void buildShips()
 			case EXPAND: ; //space is already taken by own ship so continue to build onto ship
 				if(shipBuilt)
 				{
-			
 				int expansionSize=(rand() % 3)+1;
 				for(int j=0;j<expansionSize;j++)
 				{
@@ -148,8 +147,12 @@ void buildShips()
 				
 				}
 			
-				--i;
 				}
+				else
+				{
+					--i;
+				}
+				     --i;
 				break;
 			case ERROR:
 				--i;
