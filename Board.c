@@ -14,20 +14,15 @@ void printBoard()
 	printf(" ");
 	for(int a=0; a<10;a++)
 	{
-		printf("%d ",a);//prints the top number row
+		printf("%d  ",a);//prints the top number row
 	}
 
 	for(int i =0; i<10;i++)
 	{
 		
-		printf("\n");
+		printf("\n\n");
 		printf("%d",i);//prints the number on the left row
 
-		for(int a=0;a<20;a++)//prints horizontal grid
-		{
-			printf("-");
-		}
-		printf("\n");
 
 
 		for(int j=0; j<10;j++)
@@ -48,13 +43,13 @@ void printBoard()
 					printf(RED"%s"COLORRESET,ENEMYSHIP);
 					break;
 				case ENEMY:
-					printf(RED"%s"COLORRESET,SHIP);
+					printf(BLUE"%s"COLORRESET,SEA);
 					break;
 				default:
 					break;
 					
 			}
-			printf("|");
+			printf("  ");
 		}
 	}
 	printf("\n");
