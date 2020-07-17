@@ -5,6 +5,7 @@
 #include "GlobalVariables.h"
 #include "EnemyAI.h"
 #include "EnemyBuild.h"
+#include "twoDStructure.h"
 int board[10][10] = {
 	{ EMPTY, EMPTY , EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY , EMPTY, EMPTY},
 	{ EMPTY, EMPTY , EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY , EMPTY, EMPTY},
@@ -18,11 +19,7 @@ int board[10][10] = {
 	{ EMPTY, EMPTY , EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY , EMPTY, EMPTY}
 	};
 
-struct twoDArray {
-	int positions[2][5];
-};
 bool friendly_player_choose_coordinates();
-bool enemyAI_choose_coordinates();
 struct twoDArray build_player_ships();
 
 
@@ -97,42 +94,13 @@ bool friendly_player_choose_coordinates(void)
 	return false;
 }
 
-bool enemyAI_choose_coordinates(int difficulty, struct twoDArray structure_main)
-{
-	printf("test\n");
-	int random_number = rand()%5;
-	/*for(int i = 0; i<2; i++)
-	{
-		printf("Pizza");
-		for(int j = 0; j<5 ; i++)
-		{
-			middle_pos[i][j] = final_placement.positions[i][j];
-		}
-	}*/	
-	int random_y = structure_main.positions[0][random_number];
-	int random_x = structure_main.positions[1][random_number];
-
-	int firing_y = ai_y(random_y, difficulty);
-	int firing_x = ai_x(random_x, difficulty);
-	switch(board[firing_y][firing_x])
-	{
-		case FRIENDLY:
-			board[firing_y][firing_x] == DESTROYED;
-			return true;
-		default:
-			return true;	
-	}		
-	return false;
-}
 
 
 struct twoDArray build_player_ships()  // Intializes player ships when first used. Afterwards is used to return middle_positions. Considers int counter to determine whether to initialize or not.
 {
-	printf("falling apart2\n");
 	int middle_positions[2][5];	
 	static struct twoDArray placement;
 	int x, y;
-	printf("inside\n");
 	for(int i = 0; i<5; i++)
 	{
 		while(true)
@@ -194,7 +162,6 @@ struct twoDArray build_player_ships()  // Intializes player ships when first use
 			placement.positions[i][j] = middle_positions[i][j];
 		}
 	}
-	printf("what");
 	return placement; 
 }
 
