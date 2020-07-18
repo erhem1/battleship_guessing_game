@@ -22,9 +22,14 @@ bool enemyAI_choose_coordinates(int difficulty, struct twoDArray structure_main)
 			board[firing_y][firing_x] = DESTROYED;
 			printf("Bot hits player's ship at (%d,%d)\n\n",firing_x,firing_y);
 			return true;
-		default:
+		case ENEMY:
+		case ENEMYDESTROYED:
+		case DESTROYED:
 			printf("Bot misses. Bot Attack Coordinates: (%d,%d)\n\n",firing_x,firing_y);
 			return true;	
+		default:
+			printf("bot shoots outside of board (%d,%d) \n",firing_x, firing_y);
+			return false;
 	}		
 	return false;
 }
@@ -40,7 +45,6 @@ int ai_x(int middle_position_x , int difficulty)
 			if(difficulty == EASY)          x = middle_position_x + (rand() % 7);
 			else if(difficulty == MEDIUM)   x = middle_position_x + (rand() % 6);
 			else if(difficulty == HARD)     x = middle_position_x + (rand() % 5);
-			else return -1; // Not a proper difficulty as argument
 			if( ( x>= 0 ) && ( x<10) ) return x;
 		}
 	}
@@ -51,7 +55,6 @@ int ai_x(int middle_position_x , int difficulty)
 			if(difficulty == EASY)          x = middle_position_x - (rand() % 7);
 			else if(difficulty == MEDIUM)   x = middle_position_x - (rand() % 6);
 			else if(difficulty == HARD)     x = middle_position_x - (rand() % 5);
-			else return -1; // Not a proper difficulty as argument
 			if( ( x>= 0 ) && ( x<10) ) return x;
 		}
 	}
@@ -70,7 +73,6 @@ int ai_y(int middle_position_y, int difficulty)
 			if(difficulty == EASY)         y = middle_position_y + (rand() % 4);
 			else if(difficulty == MEDIUM)  y = middle_position_y + (rand() % 3);
 			else if(difficulty == HARD)    y = middle_position_y + (rand() % 2);
-			else return -1; // Not a proper difficulty as argument
 			if( ( y>=0 ) && ( y<10) ) return y;
 		}
 	}
@@ -81,7 +83,6 @@ int ai_y(int middle_position_y, int difficulty)
 			if(difficulty == EASY)         y = middle_position_y - (rand() %4);
 			else if(difficulty == MEDIUM)  y = middle_position_y - (rand() %3);
 			else if(difficulty == HARD)    y = middle_position_y - (rand() %2);
-			else return -1; // Not a proper difficulty as argument
 			if( ( y>=0 ) && ( y<10 ) ) return y;
 		}
 	}

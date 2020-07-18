@@ -39,6 +39,8 @@ int main(void)
 	}
 	buildShips();
 	struct twoDArray structure_main = build_player_ships();
+	int count_of_ships = structure_main.count_of_ships;
+
 	int cycle = true;	
 	printBoard();
 	while(true)
@@ -52,6 +54,11 @@ int main(void)
 				sleep(1);
 				printBoard();
 			}
+			 
+
+			 
+			
+			
 		}		
 		else
 		{
@@ -82,6 +89,7 @@ bool friendly_player_choose_coordinates(void)
 			printf("fired at empty land\n");
 			return true;
 		case DESTROYED:
+		case ENEMYDESTROYED:
 			printf("fired at already destroyed ship\n");
 			return true;
 		case FRIENDLY:
@@ -101,6 +109,7 @@ bool friendly_player_choose_coordinates(void)
 
 struct twoDArray build_player_ships()  // Intializes player ships when first used. Afterwards is used to return middle_positions. Considers int counter to determine whether to initialize or not.
 {
+	int count_of_ships = 0;
 	int middle_positions[2][5];	
 	static struct twoDArray placement;
 	int x, y;
@@ -123,18 +132,32 @@ struct twoDArray build_player_ships()  // Intializes player ships when first use
 			{
 				for(int j = 1; j<= ((rand()%4)+1) ; j++)
 				{
-					if(board[y-j][x] == EMPTY || board[y-j][x] == FRIENDLY) 
-						board[y-j][x] = FRIENDLY;
-					else break;
+					switch(board[y-j][x])
+					{
+						case EMPTY: 
+							board[y-j][x] = FRIENDLY;
+							count_of_ships++;
+						case FRIENDLY:
+							continue;
+						default: 
+							break;
+					}	
 				}
 			}
 			else   		   // Down
 			{
 				for(int j = 1; j<= ((rand()%4)+1) ; j++)
 				{
-					if(board[y+j][x] == EMPTY || board[y+j][x] == FRIENDLY) 
-						board[y+j][x] = FRIENDLY;
-					else break;
+					switch(board[y+j][x])
+					{
+						case EMPTY: 
+							board[y+j][x] = FRIENDLY;
+							count_of_ships++;
+						case FRIENDLY:
+							continue;
+						default:
+							break;
+					}
 				}
 			}
 		}
@@ -144,18 +167,33 @@ struct twoDArray build_player_ships()  // Intializes player ships when first use
 			{
 				for(int j = 1; j<= ((rand()%4)+1) ; j++)
 				{
-					if(board[y][x-j] == EMPTY || board[y][x-j] == FRIENDLY) 
-						board[y][x-j] = FRIENDLY;
-					else break;
+					switch(board[y][x-j])
+					{
+						case EMPTY:
+							board[y][x-j] = FRIENDLY;
+							count_of_ships++;
+						case FRIENDLY:
+							continue;
+						default:
+							break;
+					}
 				}	
 			}
 			else		  // Right 
 			{
 				for(int j = 1; j<= ((rand()%4)+1) ; j++)
 				{
-					if(board[y][x+j] == EMPTY || board[y][x+j] == FRIENDLY) 
-						board[y][x+j] = FRIENDLY;
-					else break;
+					switch(board[y][x+j])
+					{
+						case EMPTY:
+							board[y][x+j] = FRIENDLY;
+							count_of_ships++;
+						case FRIENDLY:
+							continue;
+						default:
+							break;
+
+					}
 				}
 
 			}
@@ -169,6 +207,7 @@ struct twoDArray build_player_ships()  // Intializes player ships when first use
 			placement.positions[i][j] = middle_positions[i][j];
 		}
 	}
+	placement.count_of_ships = count_of_ships;
 	return placement; 
 }
 
