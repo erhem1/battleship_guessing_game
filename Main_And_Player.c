@@ -74,7 +74,7 @@ int main(void)
 			{	
 				cycle = true;
 				printBoard();
-				printf("Friendly Ships Remaining: %d /n Enemy Ships Remaining: %d \n", count_of_friendly_ships, count_of_enemy_ships);
+				printf("Friendly Ships Remaining: %d \n Enemy Ships Remaining: %d \n", count_of_friendly_ships, count_of_enemy_ships);
 			}
 
 		}
@@ -118,7 +118,7 @@ bool friendly_player_choose_coordinates(int* countptr_of_enemy_ships)
 
 struct twoDArray build_player_ships()  // Intializes player ships when first used. Afterwards is used to return middle_positions. Considers int counter to determine whether to initialize or not.
 {
-	int count_of_ships = 0;
+	int count_of_ships = 5;
 	int middle_positions[2][5];	
 	static struct twoDArray placement;
 	int x, y;
@@ -131,9 +131,7 @@ struct twoDArray build_player_ships()  // Intializes player ships when first use
 			if(board[y][x]==EMPTY) break;
 		}
 		middle_positions[0][i] = y; //Assign middle_position for later use 0 is y
-		printf("%d,%d,%d\n", middle_positions[0][i], y, x);
 		middle_positions[1][i] = x; //Assign middle_position for later use 1 is x 
-		printf("%d,%d\n", middle_positions[0][i], middle_positions[1][i]);	
 		board[y][x] = FRIENDLY;
 		if((rand()%2) == 1) // Vertical Allignment
 		{
