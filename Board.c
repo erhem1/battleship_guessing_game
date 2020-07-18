@@ -15,14 +15,14 @@ void printBoard()
 	printf(" ");
 	for(int a=0; a<10;a++)
 	{
-		printf("%d  ",a);//prints the top number row
+		printf("  %d",a);//prints the top number row
 	}
 
 	for(int i =0; i<10;i++)
 	{
 		
 		printf("\n\n");
-		printf("%d",i);//prints the number on the left row
+		printf("%d  ",i);//prints the number on the left row
 
 
 
