@@ -8,11 +8,11 @@ bool enemyAI_choose_coordinates();
 int ai_x(int middle_position, int difficulty);
 int ai_y(int middle_position, int difficulty);
 
-bool enemyAI_choose_coordinates(int difficulty, struct twoDArray structure_main)
+bool enemyAI_choose_coordinates(int difficulty, int* countptr_of_friendly_ships,struct twoDArray middle_positions)
 {
 	int random_number = rand()%5;
-	int random_y = structure_main.positions[0][random_number];
-	int random_x = structure_main.positions[1][random_number];
+	int random_y = middle_positions.positions[0][random_number];
+	int random_x = middle_positions.positions[1][random_number];
 
 	int firing_y = ai_y(random_y, difficulty);
 	int firing_x = ai_x(random_x, difficulty);
@@ -20,6 +20,7 @@ bool enemyAI_choose_coordinates(int difficulty, struct twoDArray structure_main)
 	{
 		case FRIENDLY:
 			board[firing_y][firing_x] = DESTROYED;
+			(*countptr_of_friendly_ships)--;
 			printf("Bot hits player's ship at (%d,%d)\n\n",firing_x,firing_y);
 			return true;
 		case ENEMY:

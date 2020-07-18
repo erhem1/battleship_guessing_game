@@ -23,7 +23,6 @@ int board[10][10] = {
 bool friendly_player_choose_coordinates();
 struct twoDArray build_player_ships();
 
-
 int main(void)
 {
 	int difficulty;
@@ -37,33 +36,38 @@ int main(void)
 		}
 		else break;
 	}
-	buildShips();
+	int count_of_enemy_ships = buildShips();
+	int* countptr_of_enemy_ships = &count_of_enemy_ships;
 	struct twoDArray structure_main = build_player_ships();
-	int count_of_ships = structure_main.count_of_ships;
-
+	int count_of_friendly_ships = structure_main.count_of_ships;
+	int* countptr_of_friendly_ships = &count_of_friendly_ships;
+	
 	int cycle = true;	
 	printBoard();
 	while(true)
 	{
+		if(count_of_friendly_ships == 0)
+		{
+			printf("AI won");
+		}
+		if(count_of_enemy_ships == 0)
+		{
+			printf("Player won");
+		}
 		if(cycle)
 		{
-			if(friendly_player_choose_coordinates()) 
+			if(friendly_player_choose_coordinates(countptr_of_enemy_ships)) 
 			{
 				
 				cycle = false;	
 				sleep(1);
 				printBoard();
 			}
-			 
-
-			 
-			
-			
 		}		
 		else
 		{
 			printf("Bot's turn\n");
-			if(enemyAI_choose_coordinates(difficulty, structure_main))
+			if(enemyAI_choose_coordinates(difficulty, countptr_of_friendly_ships, structure_main))
 			{	
 				cycle = true;
 				printBoard();
@@ -75,7 +79,7 @@ int main(void)
 	return 0;
 }
 
-bool friendly_player_choose_coordinates(void)
+bool friendly_player_choose_coordinates(int* countptr_of_enemy_ships)
 {
 	int firing_y;
 	int firing_x;
@@ -97,6 +101,7 @@ bool friendly_player_choose_coordinates(void)
 			return false;
 		case ENEMY: 
 			board[firing_y][firing_x] = ENEMYDESTROYED;
+			(*countptr_of_enemy_ships)--;
 			printf("Fired enemy ship\n");
 			return true;
 		default: 
