@@ -153,9 +153,16 @@ int buildShips()
 				}
 			
 				}
-				--i;
+				if(i>=0)
+				{
+					--i;
+				}
 				break;
 			default:
+				if(i>=0)
+				{
+					--i;
+				} 
 				break;
 		}
 	}
