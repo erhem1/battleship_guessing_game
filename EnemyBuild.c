@@ -151,7 +151,6 @@ void buildShips()
 				--i;
 				break;
 			default:
-				--i;
 				break;
 		}
 	}
