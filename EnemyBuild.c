@@ -12,7 +12,7 @@ int buildShips()
 {	
 	srand(time(NULL));
 	int shipTiles=0;
-	int xCoordinate = rand() % 5;
+	int xCoordinate = rand() % 10;
 	int yCoordinate = rand() % 5; //chooses a random location on the coordinate plane
 
 	int xCoorPlus=++xCoordinate;
@@ -141,7 +141,7 @@ int buildShips()
 
 				if(expandFailed)
 				{
-					xCoordinate = rand() % 5;
+					xCoordinate = rand() % 10;
 					yCoordinate = rand() % 5;
 					xCoorPlus=++xCoordinate;
 					yCoorPlus=++yCoordinate;
