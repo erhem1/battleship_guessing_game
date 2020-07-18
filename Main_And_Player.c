@@ -49,7 +49,7 @@ int main(void)
 			{
 				
 				cycle = false;	
-				sleep(3);
+				sleep(1);
 				printBoard();
 			}
 		}		
@@ -88,7 +88,7 @@ bool friendly_player_choose_coordinates(void)
 			printf("Can't fire at friendly unit \n");
 			return false;
 		case ENEMY: 
-			board[firing_y][firing_x] = DESTROYED;
+			board[firing_y][firing_x] = ENEMYDESTROYED;
 			printf("Fired enemy ship\n");
 			return true;
 		default: 

@@ -4,6 +4,7 @@
 #define GREEN "\x1b[32m"
 #define RED "\x1b[31m"
 #define BLUE  "\x1b[34m"
+#define WHITE "\x1b[37;1m"
 #define COLORRESET "\x1b[0m"
 #define SEA "#"
 #define SHIP "@"
@@ -37,10 +38,10 @@ void printBoard()
 					printf(GREEN"%s"COLORRESET,SHIP);
 					break;
 				case DESTROYED:
-					printf(RED"%s"COLORRESET,SHIP);
+					printf(RED"%%"COLORRESET);
 					break;
 				case ENEMYDESTROYED:
-					printf(RED"%s"COLORRESET,ENEMYSHIP);
+					printf(WHITE"%s"COLORRESET,ENEMYSHIP);
 					break;
 				case ENEMY:
 					printf(BLUE"%s"COLORRESET,SEA);

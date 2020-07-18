@@ -37,22 +37,22 @@ int ai_x(int middle_position_x , int difficulty)
 	{
 		while(1)
 		{
-			if(difficulty == EASY)          x = middle_position_x + (rand() % 4);
-			else if(difficulty == MEDIUM)   x = middle_position_x + (rand() % 3);
-			else if(difficulty == HARD)     x = middle_position_x + (rand() % 2);
+			if(difficulty == EASY)          x = middle_position_x + (rand() % 7);
+			else if(difficulty == MEDIUM)   x = middle_position_x + (rand() % 6);
+			else if(difficulty == HARD)     x = middle_position_x + (rand() % 5);
 			else return -1; // Not a proper difficulty as argument
-			if( ( x>= 0 ) && ( x<100) ) return x;
+			if( ( x>= 0 ) && ( x<10) ) return x;
 		}
 	}
 	else  			// 50% chance to minus the random number from  middle_position 
 	{
 		while(1)
 		{
-			if(difficulty == EASY)          x = middle_position_x - (rand() % 4);
-			else if(difficulty == MEDIUM)   x = middle_position_x - (rand() % 3);
-			else if(difficulty == HARD)     x = middle_position_x - (rand() % 2);
+			if(difficulty == EASY)          x = middle_position_x - (rand() % 7);
+			else if(difficulty == MEDIUM)   x = middle_position_x - (rand() % 6);
+			else if(difficulty == HARD)     x = middle_position_x - (rand() % 5);
 			else return -1; // Not a proper difficulty as argument
-			if( ( x>= 0 ) && ( x<100) ) return x;
+			if( ( x>= 0 ) && ( x<10) ) return x;
 		}
 	}
 
@@ -71,7 +71,7 @@ int ai_y(int middle_position_y, int difficulty)
 			else if(difficulty == MEDIUM)  y = middle_position_y + (rand() % 3);
 			else if(difficulty == HARD)    y = middle_position_y + (rand() % 2);
 			else return -1; // Not a proper difficulty as argument
-			if( ( y>=0 ) && ( y<100 ) ) return y;
+			if( ( y>=0 ) && ( y<10) ) return y;
 		}
 	}
 	else			// 50% chance to subtract te random from middle_position   
@@ -82,7 +82,7 @@ int ai_y(int middle_position_y, int difficulty)
 			else if(difficulty == MEDIUM)  y = middle_position_y - (rand() %3);
 			else if(difficulty == HARD)    y = middle_position_y - (rand() %2);
 			else return -1; // Not a proper difficulty as argument
-			if( ( y>=0 ) && ( y<100 ) ) return y;
+			if( ( y>=0 ) && ( y<10 ) ) return y;
 		}
 	}
 }
