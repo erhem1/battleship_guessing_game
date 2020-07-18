@@ -26,6 +26,7 @@ bool enemyAI_choose_coordinates(int difficulty, int* countptr_of_friendly_ships,
 		case ENEMY:
 		case ENEMYDESTROYED:
 		case DESTROYED:
+		case EMPTY:
 			printf("Bot misses. Bot Attack Coordinates: (%d,%d)\n\n",firing_x,firing_y);
 			return true;	
 		default:

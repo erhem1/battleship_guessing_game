@@ -38,6 +38,7 @@ int main(void)
 	}
 	int count_of_enemy_ships = buildShips();
 	int* countptr_of_enemy_ships = &count_of_enemy_ships;
+
 	struct twoDArray structure_main = build_player_ships();
 	int count_of_friendly_ships = structure_main.count_of_ships;
 	int* countptr_of_friendly_ships = &count_of_friendly_ships;
