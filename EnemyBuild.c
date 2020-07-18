@@ -8,9 +8,10 @@
 enum BuildState{BUILD=1,EXPAND,ERROR};
 bool shipBuilt =false;
 
-void buildShips()
+int buildShips()
 {	
 	srand(time(NULL));
+	int shipTiles=0;
 	int xCoordinate = rand() % 5;
 	int yCoordinate = rand() % 5; //chooses a random location on the coordinate plane
 
@@ -38,7 +39,7 @@ void buildShips()
 			case BUILD://space is empty and can be built on	
 				board[yCoordinate][xCoordinate]=ENEMY;
 				shipBuilt=true;
-			
+				shipTiles++;
 				break;
 			case EXPAND: ; //space is already taken by own ship so continue to build onto ship
 				if(shipBuilt)
@@ -60,6 +61,7 @@ void buildShips()
 								board[yCoordinate][xCoorPlus]=ENEMY;
 								++buildDirection;
 								expandFailed=false;
+								shipTiles++;
 								break;
 							}
 							else
@@ -79,6 +81,7 @@ void buildShips()
 								board[yCoordinate][xCoorMinus]=ENEMY;
 								--buildDirection;
 								expandFailed=false;
+								shipTiles++;
 								break;
 							}
 							else
@@ -102,6 +105,7 @@ void buildShips()
 								board[yCoorPlus][xCoordinate]=ENEMY;
 								++buildDirection;
 								expandFailed=false;
+								shipTiles++;
 								break;
 							}
 							else
@@ -122,6 +126,7 @@ void buildShips()
 								board[yCoorMinus][xCoordinate]=ENEMY;
 								--buildDirection;
 								expandFailed=false;
+								shipTiles++;
 								break;
 							}
 							else
@@ -148,9 +153,16 @@ void buildShips()
 				}
 			
 				}
-				--i;
+				if(i>=0)
+				{
+					--i;
+				}
 				break;
 			default:
+				if(i>=0)
+				{
+					--i;
+				} 
 				break;
 		}
 	}
