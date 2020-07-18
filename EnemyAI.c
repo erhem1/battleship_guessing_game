@@ -19,7 +19,7 @@ bool enemyAI_choose_coordinates(int difficulty, struct twoDArray structure_main)
 	switch(board[firing_y][firing_x])
 	{
 		case FRIENDLY:
-			board[firing_y][firing_x] == DESTROYED;
+			board[firing_y][firing_x] = DESTROYED;
 			printf("Bot hits player's ship at (%d,%d)\n\n",firing_x,firing_y);
 			return true;
 		default:
