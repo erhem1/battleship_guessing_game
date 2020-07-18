@@ -49,11 +49,13 @@ int main(void)
 	{
 		if(count_of_friendly_ships == 0)
 		{
-			printf("AI won");
+			printf("AI won\n");
+			break;
 		}
 		if(count_of_enemy_ships == 0)
 		{
-			printf("Player won");
+			printf("Player won\n");
+			break;
 		}
 		if(cycle)
 		{
@@ -72,6 +74,7 @@ int main(void)
 			{	
 				cycle = true;
 				printBoard();
+				printf("Friendly Ships Remaining: %d /n Enemy Ships Remaining: %d \n", count_of_friendly_ships, count_of_enemy_ships);
 			}
 
 		}

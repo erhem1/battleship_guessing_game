@@ -8,7 +8,7 @@ bool enemyAI_choose_coordinates();
 int ai_x(int middle_position, int difficulty);
 int ai_y(int middle_position, int difficulty);
 
-bool enemyAI_choose_coordinates(int difficulty, int* countptr_of_friendly_ships,struct twoDArray middle_positions)
+bool enemyAI_choose_coordinates(int difficulty, int* countptr_of_friendly_ships, struct twoDArray middle_positions)
 {
 	int random_number = rand()%5;
 	int random_y = middle_positions.positions[0][random_number];
